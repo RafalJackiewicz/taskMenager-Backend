@@ -26,7 +26,6 @@ const getAllTasks = async (req, res) => {
 };
 const addNewTask = async (req, res) => {
   const newTask = req.body.title;
-  console.log(newTask);
   const q = 'INSERT INTO `tasks` VALUES(:id,:taskName,0)';
   await pool.execute(q, {
     id: uuid(),
