@@ -50,8 +50,21 @@ const addNewTask = async (req, res) => {
   });
 };
 
+const editTitleOfTask = async (req, res) => {
+  const { id, title } = req.body;
+  const q = 'UPDATE `tasks` SET `title`=:title WHERE `id`=:id';
+  await pool.execute(q, {
+    id,
+    title,
+  });
+  res.json({
+    status: 'success',
+  });
+};
+
 module.exports = {
   getAllTasks,
   addNewTask,
   deleteTask,
+  editTitleOfTask,
 };
