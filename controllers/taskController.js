@@ -62,9 +62,23 @@ const editTitleOfTask = async (req, res) => {
   });
 };
 
+const toggleTask = async (req, res) => {
+  const { id, isCompleted } = req.body;
+  const stateOfTask = isCompleted === true ? 0 : 1;
+  const q = 'UPDATE `tasks` SET `isCompleted`=:stateOfTask WHERE `id`=:id';
+  await pool.execute(q, {
+    id,
+    stateOfTask,
+  });
+  res.json({
+    status: 'success',
+  });
+};
+
 module.exports = {
   getAllTasks,
   addNewTask,
   deleteTask,
   editTitleOfTask,
+  toggleTask,
 };
